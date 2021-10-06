@@ -1,0 +1,2 @@
+# NFTography
+Platform for authentic and original photography. Ownership is certified with NFT tokens which are minted upon uploading. Original photos are uploaded and stored on the IPFS to prevent fraud and a complete transactional history of the NFT is available to view on the blockchain. The aim is to provide a decentralized platform to protect content creators and counteract copyright infringements and fraud. 
