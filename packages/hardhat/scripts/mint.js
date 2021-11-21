@@ -23,6 +23,7 @@ async function init () {
   
 }
 
+// This uploads a file to IPFS, and creates the JSON metadata
 async function upload () {
   // This needs to have an input of description and name  from the frontend to write into the metadata
   const metadata = {
@@ -35,6 +36,9 @@ async function upload () {
   return "Uploading to IPFS with hash ("+uploaded.path+")";
 }
 
+// Here we would need to call the function which checks for the authenticity of the NFT (i.e. the database search)
+
+//This function uploads and mints the NFT to the Ethereum blockchain, this should only be executed once we have the desired result from the authenticity check and the IPFS upload is complete
  async function mint () {
   await nftograph.mintItem(toAddress,uploaded.path,{gasLimit:400000})
     .catch(e => {
@@ -43,6 +47,7 @@ async function upload () {
   return "Minted to "+toAddress+"...\n";
  }
 
+ //This transfers ownership of the initialized smart contract to the owner of the NFT which is the last thing that is required
  async function transfercontract () {
   await sleep(delayMS)
   await nftograph.transferOwnership(toAddress);
