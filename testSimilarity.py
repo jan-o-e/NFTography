@@ -12,7 +12,7 @@
 # 1) Ensure that the constant variables such as DB_DIR TEST_IMG_DIR and
 # MIN_SIM_LOW_LIM are set to the correct values.
 # 2) Then execute:
-# >>> python3 testSimilarity <test_image>
+# >>> python3 testSimilarity.py <test_image>
 # 3) Where <test_image> is the name of the image you want to test for
 # the program will then go through all the images in the testDB and will
 # give a similarity score for each one, with the one with the lowest (most
