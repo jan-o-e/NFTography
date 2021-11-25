@@ -6,208 +6,85 @@ const { utils } = require("ethers");
 const R = require("ramda");
 const ipfsAPI = require('ipfs-http-client');
 const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
+import { AsyncLocalStorage } from "async_hooks";
+import { reader } from "./fileread";
+import {getName, getDesc} from "./getnamedescr";
 
 const delayMS = 1000 //sometimes xDAI needs a 6000ms break lol 😅
 
-const main = async () => {
+// ADDRESS TO MINT TO, need to change from hardcode
+const toAddress = "0xbD451AaCD336a20acb806c499EE431015C3F3594"
 
-  // ADDRESS TO MINT TO:
-  const toAddress = "0xbD451AaCD336a20acb806c499EE431015C3F3594"
-
-  console.log("\n\n 🎫 Minting to "+toAddress+"...\n");
-
+// This initializes the smart contract
+async function init () {
   const { deployer } = await getNamedAccounts();
-  const yourCollectible = await ethers.getContract("YourCollectible", deployer);
+  const nftograph = await ethers.getContract("NFTograph", deployer);
+  return("Contract initialized");
+  
+}
 
-  const buffalo = {
-    "description": "It's actually a bison?",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/buffalo.jpg",
-    "name": "Buffalo",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "green"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 42
-       }
-    ]
+// This uploads a file to IPFS, and creates the JSON metadata
+async function upload () {
+  // This needs to have an input of description and name  from the frontend to write into the metadata
+  const metadata = {
+    "description": getDesc,
+    "external_url": "",// <-- this can link to a page for the specific file too
+    "image": reader.output,
+    "name": getName,  
   }
-  console.log("Uploading buffalo...")
-  const uploaded = await ipfs.add(JSON.stringify(buffalo))
+  const uploaded = await ipfs.add(JSON.stringify(metadata));
+  return "Uploading to IPFS with hash ("+uploaded.path+")";
+}
 
-  console.log("Minting buffalo with IPFS hash ("+uploaded.path+")")
-  await yourCollectible.mintItem(toAddress,uploaded.path,{gasLimit:400000})
+// Here we would need to call the function which checks for the authenticity of the NFT (i.e. the database search)
 
+//This function uploads and mints the NFT to the Ethereum blockchain, this should only be executed once we have the desired result from the authenticity check and the IPFS upload is complete
+ async function mint () {
+  await nftograph.mintItem(toAddress,uploaded.path,{gasLimit:400000})
+    .catch(e => {
+      return "ERROR Couldn't mint NFT" 
+    })
+  return "Minted to "+toAddress+"...\n";
+ }
 
+ //This transfers ownership of the initialized smart contract to the owner of the NFT which is the last thing that is required
+ async function transfercontract () {
   await sleep(delayMS)
+  await nftograph.transferOwnership(toAddress);
+  return "Transferred ownership of contract to "+toAddress+" "
+ }
 
 
-  const zebra = {
-    "description": "What is it so worried about?",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/zebra.jpg",
-    "name": "Zebra",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "blue"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 38
-       }
-    ]
-  }
-  console.log("Uploading zebra...")
-  const uploadedzebra = await ipfs.add(JSON.stringify(zebra))
+  // const zebra = {
+  //   "description": "What is it so worried about?",
+  //   "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
+  //   "image": "https://austingriffith.com/images/paintings/zebra.jpg",
+  //   "name": "Zebra",
+  //   "attributes": [
+  //      {
+  //        "trait_type": "BackgroundColor",
+  //        "value": "blue"
+  //      },
+  //      {
+  //        "trait_type": "Eyes",
+  //        "value": "googly"
+  //      },
+  //      {
+  //        "trait_type": "Stamina",
+  //        "value": 38
+  //      }
+  //   ]
+  // }
+  // console.log("Uploading zebra...")
+  // const uploadedzebra = await ipfs.add(JSON.stringify(zebra))
 
-  console.log("Minting zebra with IPFS hash ("+uploadedzebra.path+")")
-  await yourCollectible.mintItem(toAddress,uploadedzebra.path,{gasLimit:400000})
-
-
-
-  await sleep(delayMS)
-
-
-  const rhino = {
-    "description": "What a horn!",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/rhino.jpg",
-    "name": "Rhino",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "pink"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 22
-       }
-    ]
-  }
-  console.log("Uploading rhino...")
-  const uploadedrhino = await ipfs.add(JSON.stringify(rhino))
-
-  console.log("Minting rhino with IPFS hash ("+uploadedrhino.path+")")
-  await yourCollectible.mintItem(toAddress,uploadedrhino.path,{gasLimit:400000})
+  // console.log("Minting zebra with IPFS hash ("+uploadedzebra.path+")")
+  // await yourCollectible.mintItem(toAddress,uploadedzebra.path,{gasLimit:400000})
 
 
 
-  await sleep(delayMS)
+  // await sleep(delayMS)
 
-
-  const fish = {
-    "description": "Is that an underbyte?",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/fish.jpg",
-    "name": "Fish",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "blue"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 15
-       }
-    ]
-  }
-  console.log("Uploading fish...")
-  const uploadedfish = await ipfs.add(JSON.stringify(fish))
-
-  console.log("Minting fish with IPFS hash ("+uploadedfish.path+")")
-  await yourCollectible.mintItem(toAddress,uploadedfish.path,{gasLimit:400000})
-
-
-
-  await sleep(delayMS)
-
-
-  const flamingo = {
-    "description": "So delicate.",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/flamingo.jpg",
-    "name": "Flamingo",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "black"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 6
-       }
-    ]
-  }
-  console.log("Uploading flamingo...")
-  const uploadedflamingo = await ipfs.add(JSON.stringify(flamingo))
-
-  console.log("Minting flamingo with IPFS hash ("+uploadedflamingo.path+")")
-  await yourCollectible.mintItem(toAddress,uploadedflamingo.path,{gasLimit:400000})
-
-
-
-
-
-  const godzilla = {
-    "description": "Raaaar!",
-    "external_url": "https://austingriffith.com/portfolio/paintings/",// <-- this can link to a page for the specific file too
-    "image": "https://austingriffith.com/images/paintings/godzilla.jpg",
-    "name": "Godzilla",
-    "attributes": [
-       {
-         "trait_type": "BackgroundColor",
-         "value": "orange"
-       },
-       {
-         "trait_type": "Eyes",
-         "value": "googly"
-       },
-       {
-         "trait_type": "Stamina",
-         "value": 99
-       }
-    ]
-  }
-  console.log("Uploading godzilla...")
-  const uploadedgodzilla = await ipfs.add(JSON.stringify(godzilla))
-
-  console.log("Minting godzilla with IPFS hash ("+uploadedgodzilla.path+")")
-  await yourCollectible.mintItem(toAddress,uploadedgodzilla.path,{gasLimit:400000})
-
-
-
-
-  await sleep(delayMS)
-
-  console.log("Transferring Ownership of YourCollectible to "+toAddress+"...")
-
-  await yourCollectible.transferOwnership(toAddress)
-
-  await sleep(delayMS)
 
   /*
 
@@ -251,16 +128,3 @@ const main = async () => {
    LibraryName: **LibraryAddress**
   });
   */
-
-};
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
