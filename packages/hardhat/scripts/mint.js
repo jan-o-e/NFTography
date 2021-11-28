@@ -7,7 +7,8 @@ const R = require("ramda");
 const ipfsAPI = require('ipfs-http-client');
 const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 import { AsyncLocalStorage } from "async_hooks";
-import { reader } from "./fileread";
+/*import { reader } from "./fileread";*/
+import { reader } from "smash-template-opl/js/reader";
 import {getName, getDesc} from "./getnamedescr";
 
 const delayMS = 1000 //sometimes xDAI needs a 6000ms break lol 😅
@@ -28,7 +29,6 @@ async function upload () {
   // This needs to have an input of description and name  from the frontend to write into the metadata
   const metadata = {
     "description": getDesc,
-    "external_url": "",// <-- this can link to a page for the specific file too
     "image": reader.output,
     "name": getName,  
   }
