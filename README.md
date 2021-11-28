@@ -1,7 +1,4 @@
 <h1>NFTography</h1>
-<p align="center">
-  <img src="logo2.pdf" />
-</p>
 
 NFTography is an image rights management platform for authentic and original photography. This revolutionizes the online photography world which is laden with copyright fraud and data ownership & rights issues. The ownership of images is certified with NFT's. The catch is that the images associated with the NFT's cannot already exist anywhere in the web such that we only allow for NFT based ownership of original work. Algorithmically provable original photos are uploaded and stored on IPFS which is a decentralized file-sharing platform which aims to provide access to data too large to be effectively stored on chain. The userflow is simple as all that is required is a Metamask Wallet and an Ethereum adress. The NFT's are stored through your Ethereum adress and minting is streamlined and made user friendly with the NFTography platform. Key features include auctioning and licensing. One can sell NFTographs over a certain time period through an auction, as well as buying (and of course selling) royalty free permissions (there exist a huge variety of legal image rights frameworks but this seemed to be the most straight forward and logical one for our platform) to one's NFTographs through a simple eth transaction. A complete record of all rights ever granted to any image is visible on the blockchain, as well as the ability to see the full transactional history of any NFT. The aim is to provide an easy to use, decentralized platform to empower content creators and counteract copyright infringements and fraud. This gives smaller creators and amateur photographers a chance to publish their work with secured ownership rights without the need for engaging with agencies often associated with large costs and bureacratic hurdles, particularly for those with little capital.
 
@@ -12,7 +9,7 @@ The Frontend can be viewed in \smash-template-opl\index.html
 
 Key features are handled in the following:
 
-Test Similarity Function
+Test Similarity Function 
 The testSimilarity.py function will compare the current given image with a set of images in a fileDB directory and will return TRUE/FALSE indicating that the image is/(not) unique enough to be uploaded.
 
 IPFS and Eth functions
