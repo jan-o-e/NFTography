@@ -1,3 +1,4 @@
+<h1>NFTography</h>
 <p align="center">
   <img src="logo.png" />
 </p>
