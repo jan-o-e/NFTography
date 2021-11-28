@@ -9,6 +9,6 @@ The Frontend can be viewed in \smash-template-opl\index.html
 
 Key features are handled as follows:
 
-Test Similarity Function \FileReader Test\testSimilarity.py function will compare the current given image with a set of images in a fileDB directory and will return TRUE/FALSE indicating that the image is/(not) unique enough to be uploaded.
+Test Similarity Function \testSimilarity.py function will compare the current given image with a set of images in a fileDB directory and will return TRUE/FALSE indicating that the image is/(not) unique enough to be uploaded.
 
 The functions used to upload, pin and mint NFT's are defined in \packages\hardhat\scripts. Hardhat also contains deployment information for out local Eth node and this is very similar to Scaffold-Eth.
