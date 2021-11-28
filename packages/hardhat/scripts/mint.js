@@ -8,13 +8,12 @@ const ipfsAPI = require('ipfs-http-client');
 const ipfs = ipfsAPI({host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
 import { AsyncLocalStorage } from "async_hooks";
 /*import { reader } from "./fileread";*/
-import { reader } from "smash-template-opl/js/reader";
 import {getName, getDesc} from "./getnamedescr";
 
 const delayMS = 1000 //sometimes xDAI needs a 6000ms break lol 😅
 
 // ADDRESS TO MINT TO, need to change from hardcode
-const toAddress = "0xbD451AaCD336a20acb806c499EE431015C3F3594"
+const toAddress = "0x02c7BFfEDBBaFa1244dBDd5338b303e7DeD4115D"
 
 // This initializes the smart contract
 async function init () {
