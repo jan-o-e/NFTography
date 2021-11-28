@@ -215,6 +215,7 @@ function readURL(input) {
 
 
 
+
 $(function () {
     $('#upload').on('change', function () {
         readURL(input);

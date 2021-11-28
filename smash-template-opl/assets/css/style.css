@@ -2922,7 +2922,7 @@ p {
     line-height: 36px;
     color: #121212;
     padding-bottom: 25px; }
-    @media (max-width: 767px) {
+    @media (max-width: 7357px) {
       .single-testimonial .testimonial-text .text {
         font-size: 18px;
         line-height: 32px; } }
@@ -3292,5 +3292,95 @@ p.form-message.success, p.form-message.error {
   padding-bottom: 25px;
 
 }
+
+
+/* ===== Buttons Css ===== */
+.call-action .inner-content .light-rounded-buttons .primary-btn-outline {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.call-action .inner-content .light-rounded-buttons .active.primary-btn-outline, .call-action .inner-content .light-rounded-buttons .primary-btn-outline:hover, .call-action .inner-content .light-rounded-buttons .primary-btn-outline:focus {
+  background: var(--white);
+  color: var(--primary);
+  border-color: transparent;
+}
+.call-action .inner-content .light-rounded-buttons .deactive.primary-btn-outline {
+  color: var(--dark-3);
+  border-color: var(--gray-4);
+  pointer-events: none;
+}
+
+
+/*===== latest-news-area =====*/
+.latest-news-area {
+  background: var(--white);
+  padding: 100px 0;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .latest-news-area {
+    padding: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .latest-news-area {
+    padding: 60px 0;
+  }
+}
+.latest-news-area .single-news {
+  margin-top: 30px;
+}
+.latest-news-area .single-news .image {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.latest-news-area .single-news .image img {
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s ease;
+}
+.latest-news-area .single-news .image .meta-details {
+  display: inline-block;
+  padding: 6px 15px 6px 7px;
+  border-radius: 30px;
+  background-color: var(--primary);
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+.latest-news-area .single-news .image .meta-details img {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.latest-news-area .single-news .image .meta-details span {
+  color: var(--white);
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.latest-news-area .single-news .content-body .title {
+  margin: 30px 0 20px 0;
+}
+.latest-news-area .single-news .content-body .title a {
+  color: var(--black);
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.latest-news-area .single-news .content-body .title a:hover {
+  color: var(--primary);
+}
+.latest-news-area .single-news .content-body p {
+  color: var(--dark-3);
+}
+.latest-news-area .single-news:hover .image .thumb {
+  transform: scale(1.1) rotate(1deg);
+}
+
 
 /*# sourceMappingURL=style.css.map */
