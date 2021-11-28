@@ -28,7 +28,6 @@ async function upload () {
   // This needs to have an input of description and name  from the frontend to write into the metadata
   const metadata = {
     "description": getDesc,
-    "external_url": "",// <-- this can link to a page for the specific file too
     "image": reader.output,
     "name": getName,  
   }
