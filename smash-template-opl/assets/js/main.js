@@ -207,12 +207,15 @@ function readURL(input) {
                 .attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
+
+        export {reader}
     }
 }
 
 $(function () {
     $('#upload').on('change', function () {
         readURL(input);
+
     });
 });
 
