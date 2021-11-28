@@ -3286,4 +3286,11 @@ p.form-message.success, p.form-message.error {
   z-index: 2;
   position: relative;
 }
+
+.form-group-padding {
+
+  padding-bottom: 25px;
+
+}
+
 /*# sourceMappingURL=style.css.map */
