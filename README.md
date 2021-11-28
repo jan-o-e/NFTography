@@ -8,7 +8,12 @@ NFTography is an image rights management platform for authentic and original pho
 Our long-term vision is to exist as a browser extension for popular social media platforms which would allow users to upload images, such that those uploading their photographs have a right to prove their ownership of these images. This would - at least in the context of the blockchain - evoke the sense that those who upload their images to social media platforms own their data. Moreover, we would love to implement social features such as the ability to comment and like NFT's, such that  users accrue reputation through NFT ownership and platform activity. This would allow us to implement a scoring framework for NFT's based on user likes weighted by liker reputation as well as the market price and perhaps the number of royalty free licences granted. The possibilities are really endless.
 
 <h2>Technical Details & Documentation</h2>
+The Frontend can be viewed in \smash-template-opl\index.html
 
+Key features are handled in the following:
 
 Test Similarity Function
 The testSimilarity.py function will compare the current given image with a set of images in a fileDB directory and will return TRUE/FALSE indicating that the image is/(not) unique enough to be uploaded.
+
+IPFS and Eth functions
+The functions used to upload, pin and mint NFT's are defined in \packages\hardhat\scripts. Hardhat also contains deployment information for out local Eth node and this is very similar to Scaffold-Eth.
