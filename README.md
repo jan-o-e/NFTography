@@ -16,4 +16,6 @@ Key features are handled as follows:
 
 Test Similarity Function \testSimilarity.py function will compare the current given image with a set of images in a fileDB directory and will return TRUE/FALSE indicating that the image is/(not) unique enough to be uploaded.
 
-The functions used to upload, pin and mint NFT's are defined in \packages\hardhat\scripts. Hardhat also contains deployment information for out local Eth node and this is very similar to Scaffold-Eth.
+The functions used to upload, pin and mint NFT's are defined in \packages\hardhat\scripts. Hardhat also contains deployment information for out local Eth node and this is very similar to Scaffold-Eth. The specifications in the hardhatconfig.js file handle the network which we use for minting and also allow us to use Infura to connect to an eth node.
+
+The smart contracts are found in \packages\hardhat\contracts, auction.sol is used for the auction whih unfortunately hasn't been hooked up to the frontend yet and nftography.sol is responsible for minting NFT's with the ERC-721 standard and using OpenZeppelin.
